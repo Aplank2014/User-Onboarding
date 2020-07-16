@@ -28,14 +28,15 @@ export default function Form() {
     terms: ""
   });
 
-  // schema used for all validation to determine whether the input is valid or not
+  // Schema used for all validation to determine whether the input is valid or not
   const formSchema = yup.object().shape({
     name: yup.string().required("Name is a required field"), // must include name or else error
     email: yup
       .string()
       .email("Must be a valid email address")
       .required("Must include email"), // must have string present, must be of the shape of an email
-    terms: yup.boolean().oneOf([true])
+      password: yup.string().required("Password is a required field"), // must include password or else error
+      terms: yup.boolean().oneOf([true], "Please agree to terms to continue")
   });
 
   // whenever state updates, validate the entire form. if valid, then change button to be enabled.
@@ -110,9 +111,7 @@ export default function Form() {
   const inputChange = e => {
     // use persist with async code
     e.persist(); // necessary because we're passing the event asyncronously and we need it to exist even after this function completes (which will complete before validateChange finishes)
-    console.log("input changed!", e.target.value);
-    console.log("checkbox change", e.target.checked);
-    console.log("name of input that fired event", e.target.name); // [e.target.name]: e.target.value --> computed props
+    
 
     let checkboxVal = true;
 
@@ -147,6 +146,7 @@ export default function Form() {
         />
         {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
       </label>
+      <br></br>
       <label htmlFor="email">
         Email
         <input
@@ -160,15 +160,17 @@ export default function Form() {
           <p className="error">{errors.email}</p>
         ) : null}
       </label>
+      <br></br>
       <label htmlFor="password">
         Password
-        <textarea
+        <input
           id="password"
           name="password"
           value={formState.password}
           onChange={inputChange}
         />
       </label>
+      <br></br>
       
       <label htmlFor="terms" className="terms">
         <input
@@ -183,10 +185,11 @@ export default function Form() {
           <p className="error">{errors.terms}</p>
         ) : null}
       </label>
+      <br></br>
+      <br></br>
       <button type="submit" disabled={buttonDisabled}>
         Submit
       </button>
-      <pre>{JSON.stringify(post, null, 2)}</pre>
     </form>
   );
 }
