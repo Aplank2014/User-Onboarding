@@ -64,6 +64,7 @@ input, textarea {
   border: 1px solid #ff65a3;
   border-radius: 4px;
 }
+
 button {
   background: green;
   border: 1px solid green;
@@ -73,11 +74,13 @@ button {
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.12), 0 2px 2px 1px rgba(0, 0, 0, 0.24);
   transition: all 0.2 ease-in;
 }
+
 button:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.12), 0 2px 3px 2px rgba(0, 0, 0, 0.24);
   background: yellow;
 }
+
 button:active {
   background:green;
           box-shadow: inset 0px 0px 5px;

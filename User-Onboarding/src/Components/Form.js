@@ -35,8 +35,8 @@ export default function Form() {
       .string()
       .email("Must be a valid email address")
       .required("Must include email"), // must have string present, must be of the shape of an email
-      password: yup.string().required("Password is a required field"), // must include password or else error
-      terms: yup.boolean().oneOf([true], "Please agree to terms to continue")
+    password: yup.string().required("Password is a required field"), // must include password or else error
+    terms: yup.boolean().oneOf([true], "Please agree to terms to continue")
   });
 
   // whenever state updates, validate the entire form. if valid, then change button to be enabled.
@@ -187,6 +187,7 @@ export default function Form() {
       </label>
       <br></br>
       <br></br>
+      <pre>{JSON.stringify(post, null, 2)}</pre>
       <button type="submit" disabled={buttonDisabled}>
         Submit
       </button>
